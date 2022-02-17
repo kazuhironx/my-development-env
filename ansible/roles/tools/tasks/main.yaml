@@ -63,4 +63,6 @@
       value: "{{username}}"
     - name: user.email
       value: "{{useremail}}"
+    - name: credential.helper
+      value: store
 
