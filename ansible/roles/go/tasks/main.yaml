@@ -1,0 +1,28 @@
+- name: extract go
+  become: yes
+  unarchive:
+    copy: no
+    src: "{{go_url}}"
+    dest: /usr/local
+    creates: /usr/local/go
+
+- name: copy goenv.sh
+  become: yes
+  copy:
+    src: goenv.sh
+    dest: /etc/profile.d/
+
+- name: setup goenv
+  shell: >
+    bash -lc "source /etc/profile.d/goenv.sh"
+
+- name: go get
+  shell: >
+    bash -lc "go install github.com/x-motemen/ghq@latest"
+
+- name: ghq root
+  git_config:
+    scope: global
+    name: ghq.root
+    value: ~/dev
+    

@@ -1,0 +1,22 @@
+- name: install mydotfiles
+  git: 
+    repo: https://github.com/kazuhironx/mydotfiles.git
+    dest: ~/dev/github.com/kazuhironx/mydotfiles
+
+- name: create symlink of .zshrc
+  file: 
+     src: ~/dev/github.com/kazuhironx/mydotfiles/zsh/.zshrc
+     dest: ~/.zshrc
+     state: link
+
+- name: create symlink of .tmux.conf
+  file: 
+    src: ~/dev/github.com/kazuhironx/mydotfiles/tmux/.tmux.conf
+    dest: ~/.tmux.conf
+    state: link
+
+- name: create symlink of .emacs.d
+  file:
+    src: ~/dev/github.com/kazuhironx/mydotfiles/emacs/.emacs.d
+    dest: ~/.emacs.d
+    state: link

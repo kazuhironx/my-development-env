@@ -1,0 +1,12 @@
+---
+- &base
+  hosts: local
+  connection: local
+
+- name: "-- 1. --"
+  <<: *base
+  roles:
+    - tools
+    - emacs
+    - go
+    - dotfiles

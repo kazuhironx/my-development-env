@@ -1,0 +1,66 @@
+- name: add repository
+  become: yes
+  apt_repository:
+    repo: ppa:git-core/ppa
+
+- name: install
+  become: yes
+  apt:
+    name:
+      - build-essential
+      - make
+      - cmake
+      - autoconf
+      - automake
+      - vim
+      - git
+      - zsh
+      - gdb
+      - valgrind
+      - lcov
+      - python3-pip
+      - jq
+      - curl
+      - openssl
+      - tree
+      - tmux
+      - fzf
+      - silversearcher-ag
+
+- name: change login shell to zsh
+  become: yes
+  user: 
+    name: "{{ansible_user_id}}"
+    shell: /usr/bin/zsh
+
+- name: starship 1
+  tempfile:
+    state: directory
+    suffix: starship
+  register: tempdir_1
+
+- name: starship 2
+  get_url:
+    url: https://starship.rs/install.sh
+    dest: "{{tempdir_1.path}}"
+    mode: '0755'
+  when: tempdir_1.path is defined   
+
+- name: starship 3
+  become: yes
+  expect:
+    command: sh "{{tempdir_1.path}}"/install.sh
+    responses:
+      "[y/N]": y
+
+- name: git config
+  git_config:
+    scope: global
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+  loop:
+    - name: user.name
+      value: "{{username}}"
+    - name: user.email
+      value: "{{useremail}}"
+

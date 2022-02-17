@@ -1,0 +1,2 @@
+emacs_ver: "emacs-27.2"
+emacs_url: "http://ftp.gnu.org/gnu/emacs/{{emacs_ver}}.tar.gz"

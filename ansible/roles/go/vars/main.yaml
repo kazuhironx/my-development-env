@@ -1,0 +1,2 @@
+go_ver: "go1.17.7"
+go_url: "https://go.dev/dl/{{go_ver}}.linux-amd64.tar.gz"
