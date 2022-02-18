@@ -33,6 +33,12 @@
     name: "{{ansible_user_id}}"
     shell: /usr/bin/zsh
 
+- name: zprofile
+  become: yes
+  copy:
+    src: zprofile
+    dest: /etc/zsh/zprofile
+
 - name: starship 1
   tempfile:
     state: directory
